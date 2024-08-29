@@ -1,0 +1,13 @@
+
+From a Program to Bootable Image :
+-----------------------------------
+
+1: Write an Assembly Program in (.s) file
+2: Assemble it and create object file (.o)
+3: Link object file with link script (.ld) and create Executable file (.elf)
+
+4: Use mkimage tool to create an Uimage file (.uimg) out of this executable (-A arm, -T kernel, -C none, -a 0x60000000, -e 0x60000000, -d .elf file , .uimg file)
+
+5: Use create-sd.sh script to create an SD Card image and mount the .uimg image onto it
+
+

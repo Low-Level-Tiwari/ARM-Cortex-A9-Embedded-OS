@@ -1,0 +1,36 @@
+
+
+Creating a Bootable binary of u-boot:
+---------------------------------------
+
+1: Download u-boot source code from Github
+2: Unzip the zip 
+3: Set the cross compiler variable, 'export CROSS_COMPILER=arm-none-eabi-'
+4: Set the archietecture variable, 'export ARCH=arm'
+5: Run 'make vexpress_ca9x4_config'
+6: Run 'make all'
+7: For Unix/Linux like systems 'u-boot' is the output file
+
+NOTE: Install libssl-dev using apt if promted
+
+
+
+
+
+
+Automate/Customize Boot Process:
+---------------------------------
+
+1: Edit the config file for board  (u-boot/configs/vexpress_ca9x4_defconfig)
+	
+	1.1: Edit the CONFIG_BOOTCOMMAND variable and set it to CONFIG_BOOTCOMMAND="run someCommandName"
+	1.2: 'someCommandName' is an alias for sequence of commands to be executed as the boot process
+
+2: Edit the header file which Configures Boot Commands (u-boot/include/config_distro_bootcmd.h)
+
+	2.1: Edit at the last by adding an entry for 'someCommandName' used earlier in config file
+	2.2: Write the commands to be executed at the boot prompt 
+	2.3: It should include mmc device selection, loading of bootable image and then bootm commands to load the kernel
+
+3: Finally follow step 3-7 for making u-boot binary
+
